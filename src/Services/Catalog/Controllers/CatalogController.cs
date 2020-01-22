@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Catalog.Models.DomainModels;
 using System.Net;
+using Catalog.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Controllers
 {
@@ -13,17 +15,33 @@ namespace Catalog.Controllers
     [Route("[controller]")]
     public class CatalogController : ControllerBase
     {
-        private readonly ILogger<CatalogController> _logger;
+        private readonly CatalogDbContext _catalogContext;   
 
-        public CatalogController(ILogger<CatalogController> logger)
+        public CatalogController(CatalogDbContext catalogContext)
         {
-            _logger = logger;
+            this._catalogContext = catalogContext;
+        }
+
+        [HttpGet]
+        [Route("items/{id:int}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType(typeof(CatalogItem), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CatalogItem>> ItemByIdAsync(int id)
+        {
+            var item = await _catalogContext.CatalogItems.SingleOrDefaultAsync(ci => ci.Id == id);
+
+            if (item != null)
+            {
+                return item;
+            }
+
+            return NoContent();
         }
 
         [Route("items")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public IActionResult CreateItem([FromBody] CatalogItem itemDto)
+        public IActionResult CreateItemAsync([FromBody] CatalogItem itemDto)
         {
             var item = new CatalogItem
             {
@@ -33,7 +51,9 @@ namespace Catalog.Controllers
                 Description = itemDto.Description,
                 Price = itemDto.Price
             };
-            return Ok();
+            this._catalogContext.CatalogItems.Add(item);
+
+            return CreatedAtAction(nameof(ItemByIdAsync), new {id = item.Id}, null);
         }
     }
 }
