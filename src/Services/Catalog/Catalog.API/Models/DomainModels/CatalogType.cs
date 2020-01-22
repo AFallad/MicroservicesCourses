@@ -1,4 +1,4 @@
-namespace Catalog.Models.DomainModels
+namespace Catalog.API.Models.DomainModels
 {
     public class CatalogType
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Catalog.Infrastructure.Exceptions
+namespace Catalog.API.Infrastructure.Exceptions
 {
     public class CatalogDomainException : Exception
     {

@@ -1,7 +1,7 @@
 using System;
-using Catalog.Infrastructure.Exceptions;
+using Catalog.API.Infrastructure.Exceptions;
 
-namespace Catalog.Models.DomainModels
+namespace Catalog.API.Models.DomainModels
 {
     public class CatalogItem
     {

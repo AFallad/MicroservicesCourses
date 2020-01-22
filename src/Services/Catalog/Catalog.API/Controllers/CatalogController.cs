@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Catalog.Models.DomainModels;
+using Catalog.API.Models.DomainModels;
 using System.Net;
-using Catalog.Infrastructure;
+using Catalog.API.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Controllers
@@ -32,7 +32,7 @@ namespace Catalog.Controllers
 
             if (item != null)
             {
-                return item;
+                return this.Ok(item);
             }
 
             return NoContent();

@@ -1,13 +1,9 @@
-﻿using Catalog.Infrastructure.Configurations;
-using Catalog.Models.DomainModels;
+﻿using Catalog.API.Infrastructure.Configurations;
+using Catalog.API.Models.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Catalog.Infrastructure
+namespace Catalog.API.Infrastructure
 {
     public class CatalogDbContext : DbContext
     {
