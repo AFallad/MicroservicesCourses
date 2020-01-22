@@ -8,10 +8,19 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Configurations
 {
-    public class CatalogTypeConfiguration : IEntityTypeConfiguration<CatalogItem>
+    public class CatalogTypeConfiguration : IEntityTypeConfiguration<CatalogType>
     {
-        public void Configure(EntityTypeBuilder<CatalogItem> builder)
+        public void Configure(EntityTypeBuilder<CatalogType> builder)
         {
+            builder.HasKey(ci => ci.Id);
+
+            builder.Property(ci => ci.Id)
+               .UseHiLo()
+               .IsRequired();
+
+            builder.Property(cb => cb.Type)
+                .IsRequired()
+                .HasMaxLength(100);
         }
     }
 }

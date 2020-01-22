@@ -12,6 +12,24 @@ namespace Catalog.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<CatalogItem> builder)
         {
+            builder.Property(ci => ci.Id)
+                .UseHiLo()
+                .IsRequired();
+
+            builder.Property(ci => ci.Name)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            builder.Property(ci => ci.Price)
+                .IsRequired();
+
+            builder.HasOne(ci => ci.Brand)
+                .WithMany()
+                .HasForeignKey(ci => ci.BrandId);
+
+            builder.HasOne(ci => ci.Type)
+                .WithMany()
+                .HasForeignKey(ci => ci.TypeId);
         }
     }
 }
