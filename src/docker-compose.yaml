@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  catalog-api:
+    image: catalog-api
+    environment:
+        - ConnectionString=Server=tcp:127.0.0.1,5433;Initial Catalog=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word
+    expose:
+        - "80"
+    ports:
+      - "5101:80"
+    depends_on:
+      - sqldata
+    build:
+        context: .
+        dockerfile: Services/Catalog/Catalog.API/dockerfile
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"

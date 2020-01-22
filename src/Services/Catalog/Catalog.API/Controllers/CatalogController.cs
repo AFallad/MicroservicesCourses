@@ -41,7 +41,7 @@ namespace Catalog.Controllers
         [Route("items")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public IActionResult CreateItemAsync([FromBody] CatalogItem itemDto)
+        public async Task<IActionResult> CreateItemAsync([FromBody] CatalogItem itemDto)
         {
             var item = new CatalogItem
             {
@@ -52,7 +52,7 @@ namespace Catalog.Controllers
                 Price = itemDto.Price
             };
             this._catalogContext.CatalogItems.Add(item);
-
+            await this._catalogContext.SaveChangesAsync();
             return CreatedAtAction(nameof(ItemByIdAsync), new {id = item.Id}, null);
         }
     }
