@@ -100,20 +100,18 @@ namespace Catalog.API
                     HostName = configuration["EventBusConnection"],
                     DispatchConsumersAsync = true
                 };
-                Log.Fatal($"EventBusUserName:{configuration["EventBusUserName"]}");
+
                 if (!string.IsNullOrEmpty(configuration["EventBusUserName"]))
                 {
                     factory.UserName = configuration["EventBusUserName"];
                 }
 
-                Log.Fatal($"EventBusPassword:{configuration["EventBusPassword"]}");
                 if (!string.IsNullOrEmpty(configuration["EventBusPassword"]))
                 {
                     factory.Password = configuration["EventBusPassword"];
                 }
 
                 var retryCount = 5;
-                Log.Fatal($"EventBusRetryCount:{configuration["EventBusRetryCount"]}");
                 if (!string.IsNullOrEmpty(configuration["EventBusRetryCount"]))
                 {
                     retryCount = int.Parse(configuration["EventBusRetryCount"]);
