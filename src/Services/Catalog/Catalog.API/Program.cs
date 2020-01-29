@@ -1,4 +1,5 @@
 using System.IO;
+using Autofac.Extensions.DependencyInjection;
 using Catalog.API.Extensions;
 using Catalog.API.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +33,14 @@ namespace Catalog.API
             var configuration = GetConfiguration();
             Log.Logger = CreateSerilogLogger(configuration);
 
-            CreateHostBuilder(args)
+            Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHostDefaults(webHostBuilder => {
+                    webHostBuilder
+                        .UseContentRoot(Directory.GetCurrentDirectory())
+                        .UseIISIntegration()
+                        .UseStartup<Startup>();
+                })
                 .Build()
                 .MigrateDbContext<CatalogDbContext>((ctx, services) =>
                 {

@@ -2,8 +2,11 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src 
 COPY "MicroservicesCourse.sln" "MicroservicesCourse.sln" 
 COPY "Services/Catalog/Catalog.API/Catalog.API.csproj" "Services/Catalog/Catalog.API/Catalog.API.csproj" 
-RUN dotnet restore  
-COPY "Services/Catalog/Catalog.API"  "Services/Catalog/Catalog.API" 
+COPY "Common/EventBus/EventBus/EventBus.csproj" "Common/EventBus/EventBus/EventBus.csproj" 
+COPY "Common/EventBus/EventBusRabbitMQ/EventBusRabbitMQ.csproj" "Common/EventBus/EventBusRabbitMQ/EventBusRabbitMQ.csproj" 
+RUN dotnet restore
+
+COPY . .
 RUN dotnet publish --no-restore -c Release -o /app
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
