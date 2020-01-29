@@ -1,15 +1,29 @@
 version: "3.7"
 services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
   catalog-api:
     image: catalog-api
     environment:
         - ConnectionString=Server=sqldata;Initial Catalog=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word
+        - EventBusConnection=rabbitmq
+        - EventBusUserName=user
+        - EventBusPassword=password
+        - EventBusRetryCount=5
     expose:
         - "80"
     ports:
       - "5101:80"
     depends_on:
       - sqldata
+      - rabbitmq
     build:
         context: .
         dockerfile: Services/Catalog/Catalog.API/dockerfile
