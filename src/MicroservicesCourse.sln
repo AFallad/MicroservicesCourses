@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "Common\EventBus
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBusRabbitMQ", "Common\EventBus\EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{E853AD8D-A314-43D0-A8A3-1C0C9148AA63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationEventLog", "Common\EventBus\EFUtilitiles\IntegrationEventLog.csproj", "{2C8EFF68-E68F-4BFD-BEC0-932001D7A7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationEventLog", "Common\EventBus\IntegrationEventLog\IntegrationEventLog.csproj", "{2C8EFF68-E68F-4BFD-BEC0-932001D7A7FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

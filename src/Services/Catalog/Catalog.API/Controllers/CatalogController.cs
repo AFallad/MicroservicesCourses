@@ -58,7 +58,7 @@ namespace Catalog.Controllers
             };
             this._catalogContext.CatalogItems.Add(item);
             await this._catalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(ItemByIdAsync), new {id = item.Id}, null);
+            return this.Ok();
         }
 
         [Route("items")]
@@ -79,7 +79,7 @@ namespace Catalog.Controllers
             var raiseProductPriceChangedEvent = oldPrice != productToUpdate.Price;
 
             // Update current product
-            catalogItem = productToUpdate;
+            catalogItem.Price = productToUpdate.Price;
             _catalogContext.CatalogItems.Update(catalogItem);
 
             if (raiseProductPriceChangedEvent) // Save product's data and publish integration event through the Event Bus if price has changed

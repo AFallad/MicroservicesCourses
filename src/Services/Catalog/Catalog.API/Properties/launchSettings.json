@@ -19,11 +19,15 @@
     },
     "Catalog": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionString": "Data Source=127.0.0.1,5433;User ID=sa;Password=Pass@word;Database=Microsoft.eShopOnContainers.Services.CatalogDbConnect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"
+        "ConnectionString": "Data Source=127.0.0.1,5433;User ID=sa;Password=Pass@word;Database=Microsoft.eShopOnContainers.Services.CatalogDb; Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+        "EventBusConnection": "localhost",
+        "EventBusUserName": "user",
+        "EventBusPassword": "password"
+
       }
     }
   }

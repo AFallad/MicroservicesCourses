@@ -3,6 +3,7 @@ WORKDIR /src
 COPY "MicroservicesCourse.sln" "MicroservicesCourse.sln" 
 COPY "Services/Catalog/Catalog.API/Catalog.API.csproj" "Services/Catalog/Catalog.API/Catalog.API.csproj" 
 COPY "Common/EventBus/EventBus/EventBus.csproj" "Common/EventBus/EventBus/EventBus.csproj" 
+COPY "Common/EventBus/IntegrationEventLog/IntegrationEventLog.csproj" "Common/EventBus/IntegrationEventLog/IntegrationEventLog.csproj" 
 COPY "Common/EventBus/EventBusRabbitMQ/EventBusRabbitMQ.csproj" "Common/EventBus/EventBusRabbitMQ/EventBusRabbitMQ.csproj" 
 RUN dotnet restore
 

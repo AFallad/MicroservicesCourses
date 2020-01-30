@@ -35,7 +35,7 @@ namespace Catalog.API.Infrastructure
                     await context.SaveChangesAsync();
                 }
 
-                if (!context.CatalogBrands.Any())
+                if (!context.CatalogTypes.Any())
                 {
                     await context.CatalogTypes.AddRangeAsync(this.Types);
                     await context.SaveChangesAsync();

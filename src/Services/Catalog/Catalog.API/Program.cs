@@ -2,6 +2,7 @@ using System.IO;
 using Autofac.Extensions.DependencyInjection;
 using Catalog.API.Extensions;
 using Catalog.API.Infrastructure;
+using IntegrationEventLog;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +48,9 @@ namespace Catalog.API
                     new CatalogContextSeed()
                         .SeedAsync(ctx)
                         .Wait();
+                })
+                .MigrateDbContext<IntegrationEventLogContext>((ctx, services) =>
+                {
                 })
                 .Run();
         }
